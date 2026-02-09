@@ -1,0 +1,11 @@
+# Ignore the 16MB RAM dumps
+*.bin
+*.dmp
+
+# Ignore VS Code settings and Bin_Data dumps
+.vscode/
+Bin_Data/
+
+# Ignore local text outputs (optional, if you want them private)
+Item_List.txt
+pokemon_data.txt

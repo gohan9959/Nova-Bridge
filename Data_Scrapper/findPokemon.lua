@@ -1,0 +1,74 @@
+local headersAndOffsets = require("headersAndOffsetsGen5")
+require("writeToFile")
+function find_all_anchors()
+    local found_headers = {}
+    local found = false
+    print("--- Starting Memory Scan ---")
+    for addr = headersAndOffsets.SEARCH_START, headersAndOffsets.SEARCH_END do
+        local match = true
+        for i = 1, #headersAndOffsets.BATTLE_ANCHOR do
+            if memory.readbyte(addr + i - 1) ~= headersAndOffsets.BATTLE_ANCHOR[i] then
+                match = false
+                break
+            end
+        end
+
+        if match then
+            print(string.format("Found header at: 0x%08X", addr))
+            table.insert(found_headers, addr)
+            found = true
+        end
+    end
+    print("--- Scan Complete ---")
+    return found_headers
+end
+
+function parse_pokemon_data(anchor, starter)
+    local species = memory.readword(anchor + headersAndOffsets.BATTLE_OFFS.SPECIES_ID) -- offset for Species ID
+    local hp = memory.readword(anchor + headersAndOffsets.BATTLE_OFFS.CUR_HP) -- offset for HP
+    local max_hp = memory.readword(anchor + headersAndOffsets.BATTLE_OFFS.MAX_HP) -- offset for Max HP
+    local level = memory.readbyte(anchor + headersAndOffsets.BATTLE_OFFS.LEVEL) -- offset for Level
+    local party = ""
+    if starter then
+        party = "Player"
+    else
+        party = memory.readword(anchor + headersAndOffsets.BATTLE_OFFS.IS_PLAYER) ~= 0 and "Player" or "Opponent"
+    end
+    local status = ""
+    local pokemon_stats = ""
+    local moves = ""
+    for m = 0, 3 do
+        local move_id = memory.readword(anchor + headersAndOffsets.BATTLE_OFFS.MOVES + (m * headersAndOffsets.BATTLE_OFFS.MOVE_STRIDE))
+        if move_id > 0 then
+            local pp = memory.readbyte(anchor + headersAndOffsets.BATTLE_OFFS.MOVES + (m * headersAndOffsets.BATTLE_OFFS.MOVE_STRIDE) + 2)
+            local max_pp = memory.readbyte(anchor + headersAndOffsets.BATTLE_OFFS.MOVES + (m * headersAndOffsets.BATTLE_OFFS.MOVE_STRIDE) + 3)
+            moves = moves .. string.format("MOVE|SLOT:%d|ID:%d|PP:%d|MAXPP:%d\n", m, move_id, pp, max_pp)
+        end
+    end
+    status = status .. string.format("BURNED:%d|", memory.readword(anchor + headersAndOffsets.STATUS_OFFS.BURNED)) -- Use the correct status offset
+    status = status .. string.format("POISONED:%d|", memory.readword(anchor + headersAndOffsets.STATUS_OFFS.POISONED)) -- Use the correct status offset
+    status = status .. string.format("PARALYZED:%d|", memory.readword(anchor + headersAndOffsets.STATUS_OFFS.PARALYZED)) -- Use the correct status offset
+    status = status .. string.format("SLEEP:%d", memory.readword(anchor + headersAndOffsets.STATUS_OFFS.SLEEP)) -- Use the correct status offset
+    pokemon_stats = pokemon_stats .. string.format("ATTACK:%d|", memory.readword(anchor + headersAndOffsets.BATTLE_OFFS.ATTACK))
+    pokemon_stats = pokemon_stats .. string.format("DEFENSE:%d|", memory.readword(anchor + headersAndOffsets.BATTLE_OFFS.DEFENSE))
+    pokemon_stats = pokemon_stats .. string.format("SPEED:%d|", memory.readword(anchor + headersAndOffsets.BATTLE_OFFS.SPEED))
+    pokemon_stats = pokemon_stats .. string.format("SP_ATTACK:%d|", memory.readword(anchor + headersAndOffsets.BATTLE_OFFS.SP_ATTACK))
+    pokemon_stats = pokemon_stats .. string.format("SP_DEFENSE:%d|", memory.readword(anchor + headersAndOffsets.BATTLE_OFFS.SP_DEFENSE))
+    pokemon_stats = pokemon_stats .. string.format("ABILITY:%d|", memory.readword(anchor + headersAndOffsets.BATTLE_OFFS.ABILITY))
+    pokemon_stats = pokemon_stats .. string.format("HELD_ITEM:%d\n", memory.readword(anchor + headersAndOffsets.BATTLE_OFFS.HELD_ITEM))
+    return string.format("----------------------------------------------------------\nSpecies:%d\nHP:%d|Max HP:%d\nLevel:%d\nParty:%s\nStats:%sStatus:%s\nMoves:\n%s----------------------------------------------------------\n", species, hp, max_hp, level, party, pokemon_stats, status, moves)
+end
+
+function find_pokemon()
+    local anchors = find_all_anchors()
+    local pokemon_data = ""
+    if #anchors == 0 then
+        writeToFile("pokemon_data.txt","No battle headers found. Cannot parse Pokemon data.")
+        return
+    end
+    for i, anchor in ipairs(anchors) do
+        if i > #anchors/2 then break end -- Just in case, but should not be needed
+        pokemon_data = pokemon_data .. parse_pokemon_data(anchor, i == 1)
+        writeToFile("pokemon_data.txt", pokemon_data)
+    end
+end
