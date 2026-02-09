@@ -1,5 +1,4 @@
 local headersAndOffsets = require("headersAndOffsetsGen5")
-require("writeToFile")
 
 function find_Items()
     local item = ""
@@ -14,5 +13,5 @@ function find_Items()
     if item == "" then
         item = "No items found in inventory."
     end
-    writeToFile("Item_List.txt", item)
+    return item
 end
