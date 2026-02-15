@@ -2,9 +2,11 @@
 *.bin
 *.dmp
 
-# Ignore VS Code settings and Bin_Data dumps
+# Ignore IDE and Specific Folders(For now, will be added to later)
 .vscode/
 Bin_Data/
+Data_Exchange/
+BATTLER/
 
 # Ignore local text outputs (optional, if you want them private)
 Item_List.txt

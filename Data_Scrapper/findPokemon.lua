@@ -1,5 +1,5 @@
 local headersAndOffsets = require("headersAndOffsetsGen5")
-function find_all_anchors()
+function findAllAnchors()
     local found_headers = {}
     local found = false
     print("--- Starting Memory Scan ---")
@@ -22,7 +22,7 @@ function find_all_anchors()
     return found_headers
 end
 
-function parse_pokemon_data(anchor, starter)
+function parsePokemonData(anchor, starter)
     local species = memory.readword(anchor + headersAndOffsets.BATTLE_OFFS.SPECIES_ID) -- offset for Species ID
     local hp = memory.readword(anchor + headersAndOffsets.BATTLE_OFFS.CUR_HP) -- offset for HP
     local max_hp = memory.readword(anchor + headersAndOffsets.BATTLE_OFFS.MAX_HP) -- offset for Max HP
@@ -57,15 +57,15 @@ function parse_pokemon_data(anchor, starter)
     return string.format("----------------------------------------------------------\nSpecies:%d\nHP:%d|Max HP:%d\nLevel:%d\nParty:%s\nStats:%s\nStatus:%s\nHeld Item:%d\nMoves:\n%s----------------------------------------------------------\n", species, hp, max_hp, level, party, pokemon_stats, status, held_item, moves)
 end
 
-function find_pokemon()
-    local anchors = find_all_anchors()
+function findPokemon()
+    local anchors = findAllAnchors()
     local pokemon_data = ""
     if #anchors == 0 then
         return "No battle headers found. Cannot parse Pokemon data."
     end
     for i, anchor in ipairs(anchors) do
         if i > #anchors/2 then break end -- Just in case, but should not be needed
-        pokemon_data = pokemon_data .. parse_pokemon_data(anchor, i == 1)
+        pokemon_data = pokemon_data .. parsePokemonData(anchor, i == 1)
     end
     return pokemon_data
 end

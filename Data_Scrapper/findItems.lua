@@ -1,6 +1,6 @@
 local headersAndOffsets = require("headersAndOffsetsGen5")
 
-function find_Items()
+function findItems()
     local item = ""
     -- Parse Items
     for i = 0, headersAndOffsets.ITEM_SIZE, 4 do
