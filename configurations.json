@@ -1,0 +1,9 @@
+{
+    "INTERVAL": 60,
+    "PATHS": {
+        "COMMANDS": "../Data_Exchange/Commands.json",
+        "CONFIG": "../Data_Exchange/GameConfig.json",
+        "ITEMS": "../Data_Exchange/ItemsData.json",
+        "POKEMON": "../Data_Exchange/PokemonData.json"
+    }
+}

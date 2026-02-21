@@ -1,4 +1,6 @@
 local headersAndOffsets = require("headersAndOffsetsGen5")
+local json = require("Require.dkjson")
+
 function findAllAnchors()
     local found_headers = {}
     local found = false
@@ -23,49 +25,59 @@ function findAllAnchors()
 end
 
 function parsePokemonData(anchor, starter)
-    local species = memory.readword(anchor + headersAndOffsets.BATTLE_OFFS.SPECIES_ID) -- offset for Species ID
-    local hp = memory.readword(anchor + headersAndOffsets.BATTLE_OFFS.CUR_HP) -- offset for HP
-    local max_hp = memory.readword(anchor + headersAndOffsets.BATTLE_OFFS.MAX_HP) -- offset for Max HP
-    local level = memory.readbyte(anchor + headersAndOffsets.BATTLE_OFFS.LEVEL) -- offset for Level
-    local party = ""
-    local status = ""
-    local pokemon_stats = ""
-    local held_item = memory.readword(anchor + headersAndOffsets.BATTLE_OFFS.HELD_ITEM)
-    local moves = ""
-    if starter then
-        party = "Player"
-    else
-        party = memory.readword(anchor + headersAndOffsets.BATTLE_OFFS.IS_PLAYER) ~= 0 and "Player" or "Opponent"
-    end
+    local data = {
+        speciesId = memory.readword(anchor + headersAndOffsets.BATTLE_OFFS.SPECIES_ID),
+        hp = memory.readword(anchor + headersAndOffsets.BATTLE_OFFS.CUR_HP),
+        maxHp = memory.readword(anchor + headersAndOffsets.BATTLE_OFFS.MAX_HP),
+        level = memory.readbyte(anchor + headersAndOffsets.BATTLE_OFFS.LEVEL),
+        heldItem = memory.readword(anchor + headersAndOffsets.BATTLE_OFFS.HELD_ITEM),
+        party = (starter or memory.readword(anchor + headersAndOffsets.BATTLE_OFFS.IS_PLAYER) ~= 0) and "Player" or "Opponent",
+        moves = {},  -- Nested table for moves
+        status = {}, -- Nested table for status
+        stats = {}   -- Nested table for stats
+    }
+
+    -- 1. Parse Moves as a list of objects
     for m = 0, 3 do
         local move_id = memory.readword(anchor + headersAndOffsets.BATTLE_OFFS.MOVES + (m * headersAndOffsets.BATTLE_OFFS.MOVE_STRIDE))
         if move_id > 0 then
-            local pp = memory.readbyte(anchor + headersAndOffsets.BATTLE_OFFS.MOVES + (m * headersAndOffsets.BATTLE_OFFS.MOVE_STRIDE) + 2)
-            local max_pp = memory.readbyte(anchor + headersAndOffsets.BATTLE_OFFS.MOVES + (m * headersAndOffsets.BATTLE_OFFS.MOVE_STRIDE) + 3)
-            moves = moves .. string.format("MOVE|SLOT:%d|ID:%d|PP:%d|MAXPP:%d\n", m, move_id, pp, max_pp)
+            table.insert(data.moves, {
+                slot = m,
+                id = move_id,
+                pp = memory.readbyte(anchor + headersAndOffsets.BATTLE_OFFS.MOVES + (m * headersAndOffsets.BATTLE_OFFS.MOVE_STRIDE) + 2),
+                maxPp = memory.readbyte(anchor + headersAndOffsets.BATTLE_OFFS.MOVES + (m * headersAndOffsets.BATTLE_OFFS.MOVE_STRIDE) + 3)
+            })
         end
     end
-    for s, status_name in pairs(headersAndOffsets.STATUS_OFFS) do
-        local status_value = memory.readword(anchor + headersAndOffsets.STATUS_OFFS[s])
-        status = status .. string.format("%s:%d|", s, status_value)
-    end
-    for _, stat_name in pairs({"ATTACK", "DEFENSE", "SPEED", "SP_ATTACK", "SP_DEFENSE", "ABILITY"}) do
-        local stat_value = memory.readword(anchor + headersAndOffsets.BATTLE_OFFS[stat_name])
-        pokemon_stats = pokemon_stats .. string.format("%s:%d|", stat_name, stat_value)
+
+    -- 2. Parse Status
+    for s, _ in pairs(headersAndOffsets.STATUS_OFFS) do
+        data.status[s] = memory.readword(anchor + headersAndOffsets.STATUS_OFFS[s])
     end
 
-    return string.format("----------------------------------------------------------\nSpecies:%d\nHP:%d|Max HP:%d\nLevel:%d\nParty:%s\nStats:%s\nStatus:%s\nHeld Item:%d\nMoves:\n%s----------------------------------------------------------\n", species, hp, max_hp, level, party, pokemon_stats, status, held_item, moves)
+    -- 3. Parse Stats
+    for _, stat_name in pairs({"ATTACK", "DEFENSE", "SPEED", "SP_ATTACK", "SP_DEFENSE", "ABILITY"}) do
+        data.stats[stat_name] = memory.readword(anchor + headersAndOffsets.BATTLE_OFFS[stat_name])
+    end
+
+    return data -- Return the TABLE, not a string
 end
 
 function findPokemon()
     local anchors = findAllAnchors()
-    local pokemon_data = ""
+    local all_pokemon = {} -- This will be our master array
+
     if #anchors == 0 then
-        return "No battle headers found. Cannot parse Pokemon data."
+        return json.encode({ error = "No battle headers found" })
     end
+
     for i, anchor in ipairs(anchors) do
-        if i > #anchors/2 then break end -- Just in case, but should not be needed
-        pokemon_data = pokemon_data .. parsePokemonData(anchor, i == 1)
+        if i > #anchors/2 then break end 
+        
+        local p_data = parsePokemonData(anchor, i == 1)
+        table.insert(all_pokemon, p_data)
     end
-    return pokemon_data
+
+    -- Encode the entire master list into one JSON string
+    return json.encode(all_pokemon, { indent = true })
 end

@@ -1,40 +1,38 @@
 require("findPokemon")
 require("findItems")
 require("writeToFile")
-require("loadConfig")
+require("readJSON")
 
-local configurations_path = "../configurations.cfg"
+local configurations_path = "../configurations.json"
 
 function scrapeData()
-    local config = loadConfig(configurations_path)
+    local config = readJSON(configurations_path)
     if not config then
         print("Failed to load configuration file.")
         return
     end
-    local check_interval = tonumber(config.INTERVAL) or 60
-    local commands_file = config.GAME_COMMANDS
-    local pokemon_file = config.POKEMON_DATA
-    local items_file = config.ITEMS_DATA
+    local check_interval = tonumber(config["INTERVAL"]) or 60
+    local commands_file = config["PATHS"]["COMMANDS"]
+    local pokemon_file = config["PATHS"]["POKEMON"]
+    local items_file = config["PATHS"]["ITEMS"]
     local frame_count = 0
     while true do
         frame_count = frame_count + 1
         if frame_count >= check_interval then
             -- This code runs every x/60 second(s), where x is defined in the configurations.cfg file
-            local f = io.open(commands_file, "r")
-            if f then
-                local content = trim(f:read("*all"))
-                if content and content:match("FIND_POKEMON") then
+            local content = readJSON(commands_file)
+            if content then
+                if content["COMMAND"] == "FIND_POKEMON" then
                     print("Command received: FIND_POKEMON")
                     writeToFile(pokemon_file, findPokemon())
                     print("Pokemon data written to " .. pokemon_file)
-                elseif content and content:match("FIND_ITEMS") then
+                elseif content["COMMAND"] == "FIND_ITEMS" then
                     print("Command received: FIND_ITEMS")
                     writeToFile(items_file, findItems())
                     print("Item data written to " .. items_file)
                 else
                     print("No valid command found in commands.txt")
                 end
-                f:close()
             end
             frame_count = 0 -- Reset the counter
         end
