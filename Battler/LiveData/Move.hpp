@@ -1,8 +1,8 @@
 #pragma once
 #include <string>
 #include <cstdint>
-#include "Type.hpp"
-#include "MoveCategory.hpp"
+#include "../Common/Type.hpp"
+#include "../Common/MoveCategory.hpp"
 
 
 class Move {

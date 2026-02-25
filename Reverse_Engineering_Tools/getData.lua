@@ -1,4 +1,4 @@
-local search_value = 10 -- your Pokémon’s current HP
+local search_value = 01 -- your Pokémon’s current HP
 local start = 0x02000000
 local stop  = 0x02400000
 

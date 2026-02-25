@@ -2,9 +2,9 @@
 #include <string>
 #include <array>
 #include <cstdint>
-#include "Type.hpp"
+#include "../Common/Type.hpp"
 #include "Move.hpp"
-#include "item.hpp"
+#include "Item.hpp"
 
 class Pokemon {
 private:
