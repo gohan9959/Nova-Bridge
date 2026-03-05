@@ -9,4 +9,3 @@ function checkPixels(pixels, color)
     
     return check
 end
-    

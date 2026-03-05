@@ -1,0 +1,42 @@
+local MENU_OPTIONS = {}
+
+MENU_OPTIONS.BATTLE_MENU_OPTIONS = {
+    FIGHT = 0,
+    BAG = 1,
+    POKEMON = 2,
+    RUN = 3
+}
+
+MENU_OPTIONS.FIGHT_MENU_OPTIONS = {
+    MOVE_1 = 0,
+    MOVE_2 = 1,
+    MOVE_3 = 2,
+    MOVE_4 = 3
+}
+
+MENU_OPTIONS.POKEMON_MENU_OPTIONS = {
+    POKEMON_1 = 0,
+    POKEMON_2 = 1,
+    POKEMON_3 = 2,
+    POKEMON_4 = 3,
+    POKEMON_5 = 4,
+    POKEMON_6 = 5
+}
+
+MENU_OPTIONS.BAG_MENU_OPTIONS = {
+    HP_PP = 0,
+    POKEBALLS = 1,
+    STATUS_RESTORE = 2,
+    BATTLE_ITEMS = 3
+}
+
+MENU_OPTIONS.BAG_SUBMENU_OPTIONS = {
+    SLOT_1 = 0,
+    SLOT_2 = 1,
+    SLOT_3 = 2,
+    SLOT_4 = 3,
+    SLOT_5 = 4,
+    SLOT_6 = 5,
+}
+
+return MENU_OPTIONS

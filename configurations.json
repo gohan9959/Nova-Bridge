@@ -11,31 +11,31 @@
         "COLOR2":{"R": 173,"G": 0,"B": 74}
     },
     "BATTLE_MENU" :{
-        "MENU_CHECK_COORDINATES" : {"PIXEL1": {"X": 75,"Y": 60},"PIXEL2": {"X": 175,"Y": 60}, "PIXEL3": {"X": 175,"Y": 115}, "PIXEL4": {"X": 75,"Y": 115}},
-        "MENU_CHECK_COLORS" : {"COLOR1":{"R": 189,"G": 24,"B": 66}, "COLOR2":{"R": 222,"G": 222,"B": 231}},
-        "FIGHT_BUTTON_SELECTED":{"PIXEL1": {"X": 3,"Y": 36},"PIXEL2": {"X": 251,"Y": 36}, "PIXEL3": {"X": 3,"Y": 132}, "PIXEL4": {"X": 251,"Y": 132}},
-        "BAG_BUTTON_SELECTED":{"PIXEL1": {"X": 5,"Y": 150},"PIXEL2": {"X": 73,"Y": 150}, "PIXEL3": {"X": 73,"Y": 184}, "PIXEL4": {"X": 5,"Y": 184}},
-        "POKEMON_BUTTON_SELECTED":{"PIXEL1": {"X": 181,"Y": 150},"PIXEL2": {"X": 249,"Y": 150}, "PIXEL3": {"X": 181,"Y": 184}, "PIXEL4": {"X": 249,"Y": 184}},
-        "RUN_BUTTON_SELECTED":{"PIXEL1": {"X": 95,"Y": 156},"PIXEL2": {"X": 159,"Y": 156}, "PIXEL3": {"X": 159,"Y": 187}, "PIXEL4": {"X": 95,"Y": 187}}
+        "MENU_CHECK_COORDINATES" : {"PIXEL1": {"X": 102,"Y": 88},"PIXEL2": {"X": 142,"Y": 88}, "PIXEL3": {"X": 142,"Y": 118}, "PIXEL4": {"X": 102,"Y": 118}},
+        "MENU_CHECK_COLORS" : {"COLOR1":{"R": 206,"G": 0,"B": 57}, "COLOR2":{"R": 222,"G": 222,"B": 231}},
+        "FIGHT_BUTTON":{"PIXEL1": {"X": 3,"Y": 36},"PIXEL2": {"X": 251,"Y": 36}, "PIXEL3": {"X": 3,"Y": 132}, "PIXEL4": {"X": 251,"Y": 132}},
+        "BAG_BUTTON":{"PIXEL1": {"X": 5,"Y": 150},"PIXEL2": {"X": 73,"Y": 150}, "PIXEL3": {"X": 73,"Y": 184}, "PIXEL4": {"X": 5,"Y": 184}},
+        "POKEMON_BUTTON":{"PIXEL1": {"X": 181,"Y": 150},"PIXEL2": {"X": 249,"Y": 150}, "PIXEL3": {"X": 181,"Y": 184}, "PIXEL4": {"X": 249,"Y": 184}},
+        "RUN_BUTTON":{"PIXEL1": {"X": 95,"Y": 156},"PIXEL2": {"X": 159,"Y": 156}, "PIXEL3": {"X": 159,"Y": 187}, "PIXEL4": {"X": 95,"Y": 187}}
     },
-    "FIGHT_MENU_CHECKS" :{
-        "MOVE1_SELECTED":{"PIXEL1": {"X": 6,"Y": 36},"PIXEL2": {"X": 122,"Y": 36}, "PIXEL3": {"X": 122,"Y": 74}, "PIXEL4": {"X": 6,"Y": 74}},
-        "MOVE2_SELECTED":{"PIXEL1": {"X": 134,"Y": 36},"PIXEL2": {"X": 248,"Y": 36}, "PIXEL3": {"X": 248,"Y": 74}, "PIXEL4": {"X": 134,"Y": 74}},
-        "MOVE3_SELECTED":{"PIXEL1": {"X": 6,"Y": 86},"PIXEL2": {"X": 122,"Y": 86}, "PIXEL3": {"X": 122,"Y": 120}, "PIXEL4": {"X": 6,"Y": 120}},
-        "MOVE4_SELECTED":{"PIXEL1": {"X": 134,"Y": 86},"PIXEL2": {"X": 248,"Y": 86}, "PIXEL3": {"X": 248,"Y": 120}, "PIXEL4": {"X": 134,"Y": 120}}
+    "FIGHT_MENU" :{
+        "MOVE1":{"PIXEL1": {"X": 6,"Y": 36},"PIXEL2": {"X": 121,"Y": 36}, "PIXEL3": {"X": 121,"Y": 74}, "PIXEL4": {"X": 6,"Y": 74}},
+        "MOVE2":{"PIXEL1": {"X": 135,"Y": 36},"PIXEL2": {"X": 247,"Y": 36}, "PIXEL3": {"X": 247,"Y": 74}, "PIXEL4": {"X": 135,"Y": 74}},
+        "MOVE3":{"PIXEL1": {"X": 6,"Y": 84},"PIXEL2": {"X": 121,"Y": 84}, "PIXEL3": {"X": 121,"Y": 120}, "PIXEL4": {"X": 6,"Y": 120}},
+        "MOVE4":{"PIXEL1": {"X": 135,"Y": 84},"PIXEL2": {"X": 247,"Y": 84}, "PIXEL3": {"X": 247,"Y": 120}, "PIXEL4": {"X": 135,"Y": 120}}
     },
-    "POKEMON_MENU_CHECKS" :{
-        "POKEMON1_SELECTED":{"PIXEL1": {"X": 0,"Y": 0},"PIXEL2": {"X": 126,"Y": 0}, "PIXEL3": {"X": 126,"Y": 46}, "PIXEL4": {"X": 0,"Y": 46}},
-        "POKEMON2_SELECTED":{"PIXEL1": {"X": 128,"Y": 8},"PIXEL2": {"X": 254,"Y": 8}, "PIXEL3": {"X": 254,"Y": 54}, "PIXEL4": {"X": 128,"Y": 54}},
-        "POKEMON3_SELECTED":{"PIXEL1": {"X": 0,"Y": 48},"PIXEL2": {"X": 126,"Y": 48}, "PIXEL3": {"X": 126,"Y": 94}, "PIXEL4": {"X": 0,"Y": 94}},
-        "POKEMON4_SELECTED":{"PIXEL1": {"X": 128,"Y": 56},"PIXEL2": {"X": 254,"Y": 56}, "PIXEL3": {"X": 254,"Y": 102}, "PIXEL4": {"X": 128,"Y": 102}},
-        "POKEMON5_SELECTED":{"PIXEL1": {"X": 0,"Y": 96},"PIXEL2": {"X": 126,"Y": 96}, "PIXEL3": {"X": 126,"Y": 142}, "PIXEL4": {"X": 0,"Y": 142}},
-        "POKEMON6_SELECTED":{"PIXEL1":{"X" :128, "Y" :105},"PIXEL2":{"X" :254, "Y" :105}, "PIXEL3":{"X" :254, "Y" :151}, "PIXEL4":{"X" :128, "Y" :151}}
+    "POKEMON_MENU" :{
+        "POKEMON1":{"PIXEL1": {"X": 0,"Y": 0},"PIXEL2": {"X": 126,"Y": 0}, "PIXEL3": {"X": 126,"Y": 46}, "PIXEL4": {"X": 0,"Y": 46}},
+        "POKEMON2":{"PIXEL1": {"X": 128,"Y": 8},"PIXEL2": {"X": 254,"Y": 8}, "PIXEL3": {"X": 254,"Y": 54}, "PIXEL4": {"X": 128,"Y": 54}},
+        "POKEMON3":{"PIXEL1": {"X": 0,"Y": 48},"PIXEL2": {"X": 126,"Y": 48}, "PIXEL3": {"X": 126,"Y": 94}, "PIXEL4": {"X": 0,"Y": 94}},
+        "POKEMON4":{"PIXEL1": {"X": 128,"Y": 56},"PIXEL2": {"X": 254,"Y": 56}, "PIXEL3": {"X": 254,"Y": 102}, "PIXEL4": {"X": 128,"Y": 102}},
+        "POKEMON5":{"PIXEL1": {"X": 0,"Y": 96},"PIXEL2": {"X": 126,"Y": 96}, "PIXEL3": {"X": 126,"Y": 142}, "PIXEL4": {"X": 0,"Y": 142}},
+        "POKEMON6":{"PIXEL1":{"X" :128, "Y" :105},"PIXEL2":{"X" :254, "Y" :105}, "PIXEL3":{"X" :254, "Y" :151}, "PIXEL4":{"X" :128, "Y" :151}}
     },
-    "BAG_MENU_CHECKS" :{
-        "HP_PP_SELECTED":{"PIXEL1": {"X": 4,"Y": 18},"PIXEL2": {"X": 124,"Y": 18}, "PIXEL3": {"X": 124,"Y": 64}, "PIXEL4": {"X": 4,"Y": 64}},
-        "STATUS_RESTORE_SELECTED":{"PIXEL1": {"X": 4,"Y": 90},"PIXEL2": {"X": 124,"Y": 90}, "PIXEL3": {"X": 124,"Y": 136}, "PIXEL4": {"X": 4,"Y": 136}},
-        "POKE_BALL_SELECTED":{"PIXEL1": {"X": 132,"Y": 18},"PIXEL2": {"X": 252,"Y": 18}, "PIXEL3": {"X": 252,"Y": 64}, "PIXEL4": {"X": 132,"Y": 64}},
-        "BATTLE_ITEM_SELECTED":{"PIXEL1": {"X": 132,"Y": 90},"PIXEL2": {"X": 252,"Y": 90}, "PIXEL3": {"X": 252,"Y": 136}, "PIXEL4": {"X": 132,"Y": 136}}
+    "BAG_MENU" :{
+        "HP_PP":{"PIXEL1": {"X": 4,"Y": 18},"PIXEL2": {"X": 124,"Y": 18}, "PIXEL3": {"X": 124,"Y": 64}, "PIXEL4": {"X": 4,"Y": 64}},
+        "STATUS_RESTORE":{"PIXEL1": {"X": 4,"Y": 90},"PIXEL2": {"X": 124,"Y": 90}, "PIXEL3": {"X": 124,"Y": 136}, "PIXEL4": {"X": 4,"Y": 136}},
+        "POKEBALLS":{"PIXEL1": {"X": 132,"Y": 18},"PIXEL2": {"X": 252,"Y": 18}, "PIXEL3": {"X": 252,"Y": 64}, "PIXEL4": {"X": 132,"Y": 64}},
+        "BATTLE_ITEMS":{"PIXEL1": {"X": 132,"Y": 90},"PIXEL2": {"X": 252,"Y": 90}, "PIXEL3": {"X": 252,"Y": 136}, "PIXEL4": {"X": 132,"Y": 136}}
     }
 }

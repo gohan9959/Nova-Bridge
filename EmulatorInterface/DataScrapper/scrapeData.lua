@@ -39,9 +39,3 @@ function scrapeData()
         emu.frameadvance() -- Tells DeSmuME to run the next frame
     end
 end
-
-function main()
-    print("Starting Data Scraper...")
-    scrapeData()
-end
-main()
