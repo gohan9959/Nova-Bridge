@@ -1,5 +1,6 @@
 require("traverseGen5")
 require("selectionStatus")
+require("controllerInputs")
 MENU_OPTIONS = require("menuOptions")
 
 
@@ -21,13 +22,16 @@ function battleMenuNavigation(menu_option, slot, sub_slot)
         print("Navigating to BAG menu option")
         navigateToSelection(slot, bagMenuSelectionStatus, traverseSubMenus)
         if sub_slot then
-            navigateToSelection(sub_slot, bagSubmenuSelectionStatus, traverseSubMenus)
+            print("Navigating to BAG submenu option")
+            --navigateToSelection(sub_slot, bagSubmenuSelectionStatus, traverseSubMenus)
         else
             print("Error: Sub-slot is nil for BAG menu option")
         end
     elseif menu_option == MENU_OPTIONS.BATTLE_MENU_OPTIONS.POKEMON then
         print("Navigating to POKEMON menu option")
         navigateToSelection(slot, pokemonMenuSelectionStatus, traverseSubMenus)
+        confirmSelection() -- Press A to confirm the Pokemon selection
+        for i = 1, 60 do emu.frameadvance() end -- Wait a few frames for the menu to react
     end
 end
 
@@ -44,18 +48,4 @@ function navigateToSelection(menu_option, selectionStatus, traverseMenu)
     end
     confirmSelection() -- Press A to confirm the selection once we're on the right option
     for i = 1, 60 do emu.frameadvance() end -- Wait a few frames for the menu to react
-end
-
-
-function confirmSelection()
-    print("Pressing A...")
-    -- Hold A for 3 frames to ensure the game engine polls it
-    for i = 1, 3 do
-        joypad.set(1, {A=true})
-        emu.frameadvance()
-    end
-    
-    -- Release A and wait for the menu to react
-    joypad.set(1, {A=false})
-    for i = 1, 10 do emu.frameadvance() end 
 end

@@ -4,7 +4,8 @@
         "COMMANDS": "../Data_Exchange/Commands.json",
         "CONFIG": "../Data_Exchange/GameConfig.json",
         "ITEMS": "../Data_Exchange/ItemsData.json",
-        "POKEMON": "../Data_Exchange/PokemonData.json"
+        "POKEMON": "../Data_Exchange/PokemonData.json",
+        "SCRIPT_STATUS": "../Data_Exchange/ScriptStatus.json"
     },
     "SELECTION_MARKER_COLORS":{
         "COLOR1":{"R": 255,"G": 0,"B": 148},

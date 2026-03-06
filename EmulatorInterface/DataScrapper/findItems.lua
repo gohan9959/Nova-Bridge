@@ -1,6 +1,6 @@
 local headersAndOffsets = require("headersAndOffsetsGen5")
 
-local json = require("Require.dkjson")
+local json = require("dkjson")
 
 function findItems()
     local inventory = {} -- This table will hold our list of item objects

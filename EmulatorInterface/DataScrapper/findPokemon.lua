@@ -1,5 +1,5 @@
 local headersAndOffsets = require("headersAndOffsetsGen5")
-local json = require("Require.dkjson")
+local json = require("dkjson")
 
 function findAllAnchors()
     local found_headers = {}
