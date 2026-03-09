@@ -1,12 +1,15 @@
 # Ignore the 16MB RAM dumps
 *.bin
 *.dmp
+*.exe
 
 # Ignore IDE and Specific Folders(For now, will be added to later)
 .vscode/
 Bin_Data/
 Data_Exchange/
+obj/
 
-# Ignore local text outputs (optional, if you want them private)
-Item_List.txt
-pokemon_data.txt
+#Ignore branch specific files
+Battler/AI/DecisionHelpers.hpp
+Battler/AI/TypeEffectiveness.hpp
+Makefile

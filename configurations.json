@@ -1,11 +1,17 @@
 {
     "INTERVAL": 60,
-    "PATHS": {
+    "COMMON_PATHS": {
         "COMMANDS": "../Data_Exchange/Commands.json",
         "CONFIG": "../Data_Exchange/GameConfig.json",
-        "ITEMS": "../Data_Exchange/ItemsData.json",
-        "POKEMON": "../Data_Exchange/PokemonData.json",
+        "ITEMS": "../Data_Exchange/Items.json",
+        "POKEMON": "../Data_Exchange/Pokemon.json",
         "SCRIPT_STATUS": "../Data_Exchange/ScriptStatus.json"
+    },
+    "AI_PATHS":{
+        "LOGS": "./Logs/BattleAI.log",
+        "POKEMON_DATA": "./Resources/PokemonData.json",
+        "ITEM_DATA": "./Resources/ItemsData.json",
+        "MOVE_DATA": "./Resources/MovesData.json"
     },
     "SELECTION_MARKER_COLORS":{
         "COLOR1":{"R": 255,"G": 0,"B": 148},

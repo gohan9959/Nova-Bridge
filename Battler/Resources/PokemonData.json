@@ -1,5 +1,17 @@
 [
     {
+        "id":0,
+        "identifier":"undefined",
+        "species_id":0,
+        "height":0,
+        "weight":0,
+        "base_experience":0,
+        "order":0,
+        "is_default":0,
+        "type1":0,
+        "type2":0
+    },
+    {
         "id":1,
         "identifier":"bulbasaur",
         "species_id":1,

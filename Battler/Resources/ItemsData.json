@@ -1,5 +1,13 @@
 [
     {
+        "id":0,
+        "identifier":"undefined",
+        "category_id":0,
+        "cost":0,
+        "fling_power":0,
+        "fling_effect_id":0
+    },
+    {
         "id":1,
         "identifier":"master-ball",
         "category_id":34,

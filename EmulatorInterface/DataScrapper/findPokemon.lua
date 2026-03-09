@@ -1,5 +1,6 @@
+require("PartyType")
 local headersAndOffsets = require("headersAndOffsetsGen5")
-local json = require("dkjson")
+local json = require("Require.dkjson")
 
 function findAllAnchors()
     local found_headers = {}
@@ -31,7 +32,7 @@ function parsePokemonData(anchor, starter)
         maxHp = memory.readword(anchor + headersAndOffsets.BATTLE_OFFS.MAX_HP),
         level = memory.readbyte(anchor + headersAndOffsets.BATTLE_OFFS.LEVEL),
         heldItem = memory.readword(anchor + headersAndOffsets.BATTLE_OFFS.HELD_ITEM),
-        party = (starter or memory.readword(anchor + headersAndOffsets.BATTLE_OFFS.IS_PLAYER) ~= 0) and "Player" or "Opponent",
+        party = (starter or memory.readword(anchor + headersAndOffsets.BATTLE_OFFS.IS_PLAYER) ~= 0) and PARTY_TYPE.PLAYER or PARTY_TYPE.OPPONENT,
         moves = {},  -- Nested table for moves
         status = {}, -- Nested table for status
         stats = {}   -- Nested table for stats
@@ -75,7 +76,8 @@ function findPokemon()
         if i > #anchors/2 then break end 
         
         local p_data = parsePokemonData(anchor, i == 1)
-        table.insert(all_pokemon, p_data)
+        local label = "Pokemon " .. (i -1)
+        table.insert(all_pokemon, { [label] = p_data })
     end
 
     -- Encode the entire master list into one JSON string

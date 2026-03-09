@@ -1,5 +1,22 @@
 [
     {
+        "id":0,
+        "identifier":"undefined",
+        "generation_id":1,
+        "type_id":0,
+        "power":0,
+        "pp":0,
+        "accuracy":0,
+        "priority":0,
+        "target_id":0,
+        "damage_class_id":0,
+        "effect_id":0,
+        "effect_chance":0,
+        "contest_type_id":0,
+        "contest_effect_id":0,
+        "super_contest_effect_id":0
+    },
+    {
         "id":1,
         "identifier":"pound",
         "generation_id":1,
