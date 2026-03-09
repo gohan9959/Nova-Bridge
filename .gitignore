@@ -10,6 +10,4 @@ Data_Exchange/
 obj/
 
 #Ignore branch specific files
-Battler/AI/DecisionHelpers.hpp
-Battler/AI/TypeEffectiveness.hpp
 Makefile
