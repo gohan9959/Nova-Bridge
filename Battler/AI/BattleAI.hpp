@@ -1,7 +1,6 @@
 #pragma once
 #include <vector>
 #include <array>
-#include "TypeEffectiveness.hpp"
 #include "../LiveData/LiveData.hpp"
 #include "../Include/json.hpp"
 
