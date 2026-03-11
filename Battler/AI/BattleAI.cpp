@@ -1,6 +1,7 @@
 #include <iostream>
 #include <thread> 
 #include <chrono>
+#include "DecisionHelpers.hpp"
 #include "BattleAI.hpp"
 #include "../Controller/Controller.hpp"
 #include "../Global.hpp"
@@ -69,11 +70,22 @@ void BattleAI::decideNextMove() {
 }
 
 void BattleAI::battleLogic() {
-    // Placeholder for battle logic implementation
-    std::cout << "Deciding next move based on current battle state..." << std::endl;
-    Controller::sendCommand(CommandType::NAVIGATE_BATTLE_MENU, MenuOptions::FIGHT, static_cast<uint8_t>(FightMenuOptions::MOVE1), 0, config->getCommandFilePath());
-    // Here you would analyze partyData, opponentPartyData, and itemData to make an informed decision
-    // For example, you might check the health of your Pokemon and decide to use a healing item or switch Pokemon
-    // Or you might analyze the opponent's Pokemon types and choose a move that is super effective
+    calculatePartyMovesDamage(partyData, opponentPartyData[0]);
+    float dangerScore = calculateDangerScore(partyData[0], opponentPartyData[0]);
+    int switchSlot = -1;
+    uint8_t currentBest = getBestMove(partyData[0].getMoves());
+    if(dangerScore > 1.5f){
+        switchSlot = findBestSwitch(partyData, opponentPartyData[0], dangerScore);
+    }
+    if(switchSlot != -1){
+      Controller::sendCommand(CommandType::NAVIGATE_BATTLE_MENU, MenuOptions::POKEMON, switchSlot, 0, config->getCommandFilePath());  
+    }
+    else{
+        //check for health place holder, need to implement item usage in lua and then implement this
+        //if health < 0.2f
+        //heal
+        //else
+        Controller::sendCommand(CommandType::NAVIGATE_BATTLE_MENU, MenuOptions::FIGHT, currentBest, 0, config->getCommandFilePath());
+    }
 }
 

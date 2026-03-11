@@ -46,5 +46,6 @@ public:
     void setStatusCondition(StatusCondition condition) { statusCondition = condition; };
     uint16_t getHeldItem() const { return heldItem; };
     const std::array<Move, 4>& getMoves() const { return moves; };
+    std::array<Move, 4>& getMoves() { return moves; };
     ~Pokemon() {};
 };
